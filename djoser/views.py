@@ -70,13 +70,13 @@ class UserViewSet(viewsets.ModelViewSet):
         elif self.action == "activation":
             self.permission_classes = settings.PERMISSIONS.activation
         elif self.action == "resend_activation":
-            self.permission_classes = settings.PERMISSIONS.activate_password
+            self.permission_classes = settings.PERMISSIONS.password_reset
         elif self.action == "list":
             self.permission_classes = settings.PERMISSIONS.user_list
         elif self.action == "reset_password":
             self.permission_classes = settings.PERMISSIONS.password_reset
         elif self.action == "activate_password":
-            self.permission_classes = settings.PERMISSIONS.password_reset
+            self.permission_classes = settings.PERMISSIONS.activate_password
         elif self.action == "reset_password_confirm":
             self.permission_classes = settings.PERMISSIONS.password_reset_confirm
         elif self.action == "set_password":
