@@ -75,6 +75,8 @@ class UserViewSet(viewsets.ModelViewSet):
             self.permission_classes = settings.PERMISSIONS.user_list
         elif self.action == "reset_password":
             self.permission_classes = settings.PERMISSIONS.password_reset
+        elif self.action == "activate_password":
+            self.permission_classes = settings.PERMISSIONS.password_reset
         elif self.action == "reset_password_confirm":
             self.permission_classes = settings.PERMISSIONS.password_reset_confirm
         elif self.action == "set_password":
@@ -258,6 +260,19 @@ class UserViewSet(viewsets.ModelViewSet):
             settings.EMAIL.password_changed_confirmation(self.request, context).send(to)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+    @action(["post"], detail=False)
+    def activate_password(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.get_user()
+
+        if user:
+            context = {"user": user}
+            to = [get_user_email(user)]
+            settings.EMAIL.password_reset(self.request, context).send(to)
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
     @action(["post"], detail=False, url_path="set_{}".format(User.USERNAME_FIELD))
     def set_username(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

@@ -44,6 +44,7 @@ default_settings = {
     "SERIALIZERS": ObjDict(
         {
             "activation": "djoser.serializers.ActivationSerializer",
+            "activate_password": "djoser.serializers.SendEmailResetSerializer",
             "password_reset": "djoser.serializers.SendEmailResetSerializer",
             "password_reset_confirm": "djoser.serializers.PasswordResetConfirmSerializer",
             "password_reset_confirm_retype": "djoser.serializers.PasswordResetConfirmRetypeSerializer",
@@ -67,6 +68,7 @@ default_settings = {
         {
             "activation": "djoser.email.ActivationEmail",
             "confirmation": "djoser.email.ConfirmationEmail",
+            "activate_password": "djoser.email.ActivatePasswordEmail",
             "password_reset": "djoser.email.PasswordResetEmail",
             "password_changed_confirmation": "djoser.email.PasswordChangedConfirmationEmail",
             "username_changed_confirmation": "djoser.email.UsernameChangedConfirmationEmail",
