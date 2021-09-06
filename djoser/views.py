@@ -106,7 +106,7 @@ class UserViewSet(viewsets.ModelViewSet):
             return settings.SERIALIZERS.activation
         elif self.action == "resend_activation":
             return settings.SERIALIZERS.password_reset
-        elif self.action == "reset_password":
+        elif self.action in ["reset_password", "activate_password"]:
             return settings.SERIALIZERS.password_reset
         elif self.action == "reset_password_confirm":
             if settings.PASSWORD_RESET_CONFIRM_RETYPE:
